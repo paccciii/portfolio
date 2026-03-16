@@ -439,21 +439,123 @@ footer{border-top:1px solid var(--rule);padding:1.75rem 2rem;text-align:center;f
   </svg>
 </button>
 
-<!-- CHAT PANEL -->
+<!-- ── CHAT PANEL ── -->
 <div id="chat-panel">
   <div class="chat-header">
     <div class="chat-avatar">PSB</div>
-    <div>
-      <div class="chat-hname">Prashant's AI Assistant</div>
-      <div class="chat-hstatus">Online — ask me anything</div>
+    <div class="chat-header-info">
+      <div class="chat-header-name">Prashant's AI Assistant</div>
+      <div class="chat-header-status">Online — ask me anything</div>
     </div>
     <button class="chat-close" onclick="toggleChat()">×</button>
   </div>
 
   <div class="chat-messages" id="chat-msgs">
-    <div class="msg msg-bot">👋 Hi! I'm Prashant's AI assistant. Ask me about his projects, skills, or experience at VigyanLabs!</div>
+    <div class="msg msg-bot">👋 Hi! I'm Prashant's AI assistant. Ask me about his work, projects, skills, or experience at VigyanLabs!</div>
   </div>
 
-  <div class="chat-sugs" id="chat-sugs">
-    <button class="sug-btn" onclick="pickSug(this)">What's the Terraform Provider?</button>
-    <button c
+  <div class="chat-suggestions" id="chat-sugs">
+    <button class="sug-btn" onclick="sendSuggestion(this)">What did you build at VigyanLabs?</button>
+    <button class="sug-btn" onclick="sendSuggestion(this)">Tell me about FEMTO</button>
+    <button class="sug-btn" onclick="sendSuggestion(this)">What's your Kubernetes experience?</button>
+  </div>
+
+  <div class="chat-input-row">
+    <textarea id="chat-input" rows="1" placeholder="Ask about skills, projects…" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+    <button id="chat-send" onclick="sendMessage()" title="Send">
+      <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+const API = 'https://ai-portfolio.prashantbhovi92.workers.dev/';
+let open = false;
+let busy = false;
+
+function scrollTo(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'})}
+
+function toggleChat(){
+  open = !open;
+  document.getElementById('chat-panel').classList.toggle('open', open);
+  if(open) setTimeout(()=>document.getElementById('chat-input').focus(), 300);
+}
+
+function handleKey(e){
+  if(e.key==='Enter' && !e.shiftKey){e.preventDefault();sendMessage();}
+}
+
+function autoResize(el){
+  el.style.height='auto';
+  el.style.height=Math.min(el.scrollHeight,80)+'px';
+}
+
+function addMsg(text, role){
+  const msgs = document.getElementById('chat-msgs');
+  const div = document.createElement('div');
+  div.className = 'msg msg-'+role;
+  div.textContent = text;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+
+function showTyping(){
+  const msgs = document.getElementById('chat-msgs');
+  const div = document.createElement('div');
+  div.className = 'msg-typing';
+  div.id = 'typing-indicator';
+  div.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function hideTyping(){
+  document.getElementById('typing-indicator')?.remove();
+}
+
+function hideSuggestions(){
+  const s = document.getElementById('chat-sugs');
+  if(s) s.style.display='none';
+}
+
+async function sendMessage(){
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if(!text || busy) return;
+
+  hideSuggestions();
+  addMsg(text, 'user');
+  input.value='';
+  input.style.height='auto';
+  busy=true;
+  document.getElementById('chat-send').disabled=true;
+  showTyping();
+
+  try{
+    const res = await fetch(API,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({message: text})
+    });
+    const data = await res.json();
+    hideTyping();
+    addMsg(data.reply || 'Sorry, I could not get a response. Please try again.','bot');
+  } catch(err){
+    hideTyping();
+    addMsg('Connection error — please try again in a moment.','bot');
+  }
+
+  busy=false;
+  document.getElementById('chat-send').disabled=false;
+}
+
+function sendSuggestion(btn){
+  const input = document.getElementById('chat-input');
+  input.value = btn.textContent;
+  sendMessage();
+}
+</script>
+</body>
+</html>
+
