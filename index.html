@@ -116,7 +116,7 @@ section{max-width:960px;margin:0 auto;padding:4rem 2rem}
 footer{border-top:1px solid var(--rule);padding:1.75rem 2rem;text-align:center;font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.05em}
 
 /* ── CHAT FAB ── */
-#chat-fab{position:fixed;bottom:28px;right:28px;z-index:999;width:52px;height:52px;border-radius:50%;background:var(--accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,0.22);transition:transform .2s,box-shadow .2s}
+#chat-fab{position:fixed;bottom:28px;right:28px;z-index:999;width:60px;height:60px;border-radius:50%;background:var(--accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,0.22);transition:transform .2s,box-shadow .2s}
 #chat-fab:hover{transform:scale(1.08);box-shadow:0 6px 32px rgba(0,0,0,0.28)}
 #chat-fab svg{width:22px;height:22px;fill:white}
 
@@ -159,7 +159,7 @@ footer{border-top:1px solid var(--rule);padding:1.75rem 2rem;text-align:center;f
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">// prashant s b</div>
+  <div class="nav-logo">// Prashant S B</div>
   <div class="nav-links">
     <a onclick="goTo('story')">Story</a>
     <a onclick="goTo('experience')">Experience</a>
@@ -172,7 +172,7 @@ footer{border-top:1px solid var(--rule);padding:1.75rem 2rem;text-align:center;f
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-eyebrow">// Platform Engineer · R&amp;D · Kubernetes · AI Infrastructure</div>
+  <div class="hero-eyebrow">// Platform Engineer · R&amp;D · Data Centre ·  Kubernetes · AI Infrastructure</div>
   <h1 class="hero-name">Prashant S B<br><span>Two years.</span><br>A lot of learning.</h1>
   <p class="hero-sub">Platform Engineer at VigyanLabs — building Kubernetes-as-a-Service, distributed storage automation, cloud-native infrastructure, and AI training platforms from the ground up.</p>
   <div class="hero-contact">
@@ -291,6 +291,11 @@ footer{border-top:1px solid var(--rule);padding:1.75rem 2rem;text-align:center;f
       <div class="proj-desc">Python scripts for PetaSAN disk creation, S3 operations, and web UI automation. Bash scripts for automated KVM VM creation with disk attachment, parameter validation, and a full logging system.</div>
       <div class="proj-techs"><span class="tch">Python</span><span class="tch">Bash</span><span class="tch">KVM</span><span class="tch">QEMU</span><span class="tch">PetaSAN</span></div>
     </div>
+    <div class="proj-card">
+      <div class="proj-num">07 // Gen AI</div>
+      <div class="proj-title">GAN Text-to-Image System</div>
+      <div class="proj-desc">Built a conditional GAN from scratch using PyTorch — handling everything from loss stabilization and training pipeline design to dataset experimentation and checkpoint evaluation. An early deep-dive into generative model internals.</div>
+    </div>
 
   </div>
 </section>
@@ -330,6 +335,11 @@ footer{border-top:1px solid var(--rule);padding:1.75rem 2rem;text-align:center;f
         <li>Python · Go · Bash</li>
         <li>ELK · Prometheus · Grafana</li>
         <li>MLflow · PyTorch · TensorFlow</li>
+        <li>Machine Learning</li>
+        <li>Neural Networks</li>
+        <li>PyTorch</li>
+        <li>TensorFlow</li>
+        <li>AI Model Training</li>
       </ul>
     </div>
   </div>
@@ -406,7 +416,27 @@ footer{border-top:1px solid var(--rule);padding:1.75rem 2rem;text-align:center;f
 
 <!-- CHAT FAB -->
 <button id="chat-fab" onclick="toggleChat()" title="Chat with Prashant's AI assistant">
-  <svg viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 00-2 2v18l4-4h14a2 2 0 002-2V4a2 2 0 00-2-2zm-2 10H6v-2h12v2zm0-3H6V7h12v2z"/></svg>
+  <svg viewBox="0 0 48 48" width="52" height="52" xmlns="http://www.w3.org/2000/svg">
+    <!-- Head -->
+    <rect x="8" y="12" width="32" height="26" rx="6" fill="white" opacity="0.95"/>
+    <!-- Antenna -->
+    <line x1="24" y1="12" x2="24" y2="5" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="24" cy="4" r="2.5" fill="white"/>
+    <!-- Eyes -->
+    <rect x="13" y="19" width="8" height="7" rx="2" fill="#c44b1a"/>
+    <rect x="27" y="19" width="8" height="7" rx="2" fill="#c44b1a"/>
+    <!-- Eye shine -->
+    <rect x="15" y="21" width="2" height="2" rx="1" fill="white" opacity="0.7"/>
+    <rect x="29" y="21" width="2" height="2" rx="1" fill="white" opacity="0.7"/>
+    <!-- Mouth -->
+    <rect x="14" y="30" width="20" height="4" rx="2" fill="#c44b1a" opacity="0.5"/>
+    <rect x="17" y="30" width="4" height="4" rx="1" fill="#c44b1a"/>
+    <rect x="23" y="30" width="4" height="4" rx="1" fill="#c44b1a"/>
+    <rect x="29" y="30" width="2" height="4" rx="1" fill="#c44b1a"/>
+    <!-- Ears -->
+    <rect x="4" y="20" width="5" height="8" rx="2" fill="white" opacity="0.7"/>
+    <rect x="39" y="20" width="5" height="8" rx="2" fill="white" opacity="0.7"/>
+  </svg>
 </button>
 
 <!-- CHAT PANEL -->
